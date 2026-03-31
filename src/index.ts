@@ -27,7 +27,7 @@ function checkIfVideoIsPaused(): boolean {
     // Get if the player is currently playing or paused
     const player = document.querySelector(".video-stream") as HTMLVideoElement | null;
 
-    if (!player) return true;
+    if (!player) return false;
 
     if (player.paused) {
         logger.debug("Video paused, skipping ends at update");
