@@ -1,7 +1,7 @@
 {
     "name": "YouTube Video Ends At",
     "description": "Displays the end time of videos on YouTube.",
-    "version": "1.0",
+    "version": "1.1",
     "manifest_version": 3,
     "content_scripts": [
         {

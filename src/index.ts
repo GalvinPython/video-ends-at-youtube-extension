@@ -23,24 +23,46 @@ function addCustomSpans() {
     logger.debug("Added custom spans to .ytp-time-contents");
 }
 
+function checkIfVideoIsPaused(): boolean {
+    // Get if the player is currently playing or paused
+    const player = document.querySelector(".video-stream") as HTMLVideoElement | null;
+
+    if (!player) return false;
+
+    if (player.paused) {
+        logger.debug("Video paused, skipping ends at update");
+        return true;
+    }
+    return false;
+}
+
 // Calculate and update "ends at" text based on progress bar
-function updateEndsAt() {
-    const progressBar = document.querySelector<HTMLElement>(".ytp-progress-bar");
+function updateEndsAt(playButtonTriggered = false) {
+    const isPaused = playButtonTriggered ? checkIfVideoIsPaused() : false;
+
     const testText = document.querySelector(".vea-timestamp") as HTMLElement | null;
-    if (!progressBar || !testText) return;
+    if (!testText) return;
 
-    const now = Number(progressBar.getAttribute("aria-valuenow")) || 0;
-    const max = Number(progressBar.getAttribute("aria-valuemax")) || 0;
-    if (max === 0) return;
+    if (isPaused) {
+        testText.textContent = "Video is paused";
+        return;
+    } else {
+        const progressBar = document.querySelector<HTMLElement>(".ytp-progress-bar");
+        if (!progressBar) return;
 
-    const timeLeft = max - now;
-    const likelyToEndAt = new Date(Date.now() + timeLeft * 1000);
+        const now = Number(progressBar.getAttribute("aria-valuenow")) || 0;
+        const max = Number(progressBar.getAttribute("aria-valuemax")) || 0;
+        if (max === 0) return;
 
-    const hh = likelyToEndAt.getHours().toString().padStart(2, "0");
-    const mm = likelyToEndAt.getMinutes().toString().padStart(2, "0");
-    const ss = likelyToEndAt.getSeconds().toString().padStart(2, "0");
+        const timeLeft = max - now;
+        const likelyToEndAt = new Date(Date.now() + timeLeft * 1000);
 
-    testText.textContent = `ends at ${hh}:${mm}:${ss}`;
+        const hh = likelyToEndAt.getHours().toString().padStart(2, "0");
+        const mm = likelyToEndAt.getMinutes().toString().padStart(2, "0");
+        const ss = likelyToEndAt.getSeconds().toString().padStart(2, "0");
+
+        testText.textContent = `ends at ${hh}:${mm}:${ss}`;
+    }
 }
 
 function doTheThing() {
@@ -91,7 +113,20 @@ function setupObservers() {
         updateEndsAt(); // initial update
     }
 
+    function attachPlayButtonObserver() {
+        const playButton = document.querySelector(".ytp-play-button");
+        if (!playButton) {
+            setTimeout(attachPlayButtonObserver, 500);
+            return;
+        }
+
+        // Observe play button for state changes to trigger updates
+        const playObserver = new MutationObserver(() => updateEndsAt(true));
+        playObserver.observe(playButton, { attributes: true });
+    }
+
     attachProgressObserver();
+    attachPlayButtonObserver();
     addCustomSpans();
 }
 
