@@ -12,6 +12,8 @@
     "scripts": {
         "dev": "bun build --outdir=./dist ./src/index.ts --watch --minify",
         "dist": "bun ./src/copyToDist.ts && bun run build",
-        "build": "bun build --outdir=./dist ./src/index.ts --minify"
+        "build": "bun build --outdir=./dist ./src/index.ts --minify",
+        "package:windows": "bun run dist && powershell -ExecutionPolicy Bypass -File ./scripts/package.ps1",
+        "package:linux": "bun run dist && bash ./scripts/package.sh"
     }
 }
