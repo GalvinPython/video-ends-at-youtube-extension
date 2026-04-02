@@ -23,6 +23,10 @@ These are some issues I've determined whilst testing, but will be fixed in upcom
 - Intended for regular YouTube watch pages (`/watch?v=...`) - some URLs/video contexts may not work
 - Estimated end time is based on remaining video seconds and may feel off when playback speed is changed.
 
+## Changelog
+### 1.1
+- Added a text for a video being paused instead of the end time being stuck
+
 ## Install
 
 ### Install from stores
