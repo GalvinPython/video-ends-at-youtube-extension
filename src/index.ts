@@ -23,6 +23,13 @@ function addCustomSpans() {
     logger.debug("Added custom spans to .ytp-time-contents");
 }
 
+function getPlaybackSpeed(): number {
+    const video = Array.from(
+        document.querySelectorAll<HTMLVideoElement>('.video-stream'),
+    ).find(video => video.playbackRate)
+    return video ? video.playbackRate : 1;
+}
+
 function checkIfVideoIsPaused(): boolean {
     // Get if the player is currently playing or paused
     const player = document.querySelector(".video-stream") as HTMLVideoElement | null;
@@ -50,12 +57,14 @@ function updateEndsAt(playButtonTriggered = false) {
         const progressBar = document.querySelector<HTMLElement>(".ytp-progress-bar");
         if (!progressBar) return;
 
+        const playbackSpeed = getPlaybackSpeed();
+
         const now = Number(progressBar.getAttribute("aria-valuenow")) || 0;
         const max = Number(progressBar.getAttribute("aria-valuemax")) || 0;
         if (max === 0) return;
 
         const timeLeft = max - now;
-        const likelyToEndAt = new Date(Date.now() + timeLeft * 1000);
+        const likelyToEndAt = new Date(Date.now() + timeLeft * 1000 / playbackSpeed);
 
         const hh = likelyToEndAt.getHours().toString().padStart(2, "0");
         const mm = likelyToEndAt.getMinutes().toString().padStart(2, "0");
