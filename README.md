@@ -21,8 +21,7 @@ YouTube Video Ends At adds a live `ends at HH:MM:SS` timestamp directly in the Y
 
 These are some issues I've determined whilst testing, but will be fixed in upcoming versions:
 
-- Intended for regular YouTube watch pages (`/watch?v=...`) - some URLs/video contexts may not work
-- Estimated end time is based on remaining video seconds and may feel off when playback speed is changed.
+- Intended for regular YouTube watch pages (`/watch?v=...`) - some URLs/video contexts may not work.
 
 ## Changelog
 ### 1.2.1
@@ -30,6 +29,7 @@ These are some issues I've determined whilst testing, but will be fixed in upcom
 
 ### 1.2
 - Added playback speed support
+
 ### 1.1
 - Added a text for a video being paused instead of the end time being stuck
 
