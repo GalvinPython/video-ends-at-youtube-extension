@@ -3,6 +3,7 @@
 [![Version](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/GalvinPython/video-ends-at-youtube-extension/main/src/manifest.json&query=%24.version&label=version&color=ff7c7c)](https://github.com/GalvinPython/video-ends-at-youtube-extension/releases)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Get%20Extension-4CAF50?logo=chromewebstore&logoColor=white)](https://chromewebstore.google.com/detail/libjkhdmlojdijhlidcabicihlgnabnb)
 [![Microsoft Edge Add-ons](https://img.shields.io/badge/Edge%20Add--ons-Get%20Extension-0078D7?logo=microsoftedge&logoColor=white&labelColor=555555)](https://microsoftedge.microsoft.com/addons/detail/oogfbgmodgilnnngmhljfjckkencejnd)
+[![Mozilla Add-ons](https://img.shields.io/badge/Mozilla%20Add--ons-Get%20Extension-FF7139?logo=firefox&logoColor=white&labelColor=555555)](https://addons.mozilla.org/firefox/addon/youtube-video-ends-at/)
 
 Stop guessing. Know exactly when your video ends.
 
@@ -20,10 +21,15 @@ YouTube Video Ends At adds a live `ends at HH:MM:SS` timestamp directly in the Y
 
 These are some issues I've determined whilst testing, but will be fixed in upcoming versions:
 
-- Intended for regular YouTube watch pages (`/watch?v=...`) - some URLs/video contexts may not work
-- Estimated end time is based on remaining video seconds and may feel off when playback speed is changed.
+- Intended for regular YouTube watch pages (`/watch?v=...`) - some URLs/video contexts may not work.
 
 ## Changelog
+### 1.2.1
+- Added Firefox support
+
+### 1.2
+- Added playback speed support
+
 ### 1.1
 - Added a text for a video being paused instead of the end time being stuck
 
@@ -32,7 +38,11 @@ These are some issues I've determined whilst testing, but will be fixed in upcom
 ### Install from stores
 
 - Chrome users: click the Chrome Web Store badge above.
-- Edge users: click the Microsoft Edge Add-ons badge above.
+    - This also works for other Chromium-based browsers, e.g. Edge and Helium
+- Edge users: click the Microsoft Edge Add-ons badge above
+    - Or use the Chrome Web Store badge above if you prefer quicker reviews
+- Firefox users: click the Mozilla Add-ons badge above
+    - This also applies to other Gecko-based browsers, e.g. Zen
 
 ### Install manually (unpacked)
 
